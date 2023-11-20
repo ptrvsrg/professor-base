@@ -1,0 +1,37 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+    <div class="app-professor module">
+        <h2>Count students</h2>
+        <table class="horizontal-table">
+            <thead>
+            <tr>
+                <th>Professor</th>
+                <th>Student count</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for professor in professors %}
+                <tr>
+                    <td>
+                        <a href="{% url 'admin:forms_professor_change' professor.id %}">
+                            {{ professor.name }}
+                        </a>
+                    </td>
+                    <td>{{ professor.get_students_list.all|length }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <style>
+        .horizontal-table {
+            margin-top: 10px;
+        }
+
+        .horizontal-table td {
+            white-space: nowrap;
+        }
+    </style>
+{% endblock %}

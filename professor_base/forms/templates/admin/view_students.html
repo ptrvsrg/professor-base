@@ -1,0 +1,70 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+    <div class="app-professor module">
+        <h2>Professors and Students</h2>
+        <div class="scrollable-container">
+            <div class="horizontal-tables">
+                {% for professor in professors %}
+                    <table class="horizontal-table">
+                        <caption>
+                            <a href="{% url 'admin:forms_professor_change' professor.id %}">
+                                {{ professor.name }}
+                            </a>
+                        </caption>
+                        <thead>
+                        <tr>
+                            <th>Student</th>
+                            <th>Group</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for student in professor.get_students_list %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'admin:forms_student_change' student.id %}">
+                                        {{ student.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{% url 'admin:forms_group_change' student.group.id %}">
+                                        {{ student.group }}
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .scrollable-container {
+            max-height: 70vh; /* Установите желаемую максимальную высоту */
+            overflow-y: auto;
+        }
+
+        .horizontal-tables {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            max-width: 100%; /* Можно установить максимальную ширину по вашему усмотрению */
+            align-items: flex-start;
+            margin-top: 10px;
+        }
+
+        .horizontal-table {
+            margin-right: 10px; /* Опциональное расстояние между таблицами */
+        }
+
+        .horizontal-table caption a {
+            color: white;
+        }
+
+        .horizontal-table td {
+            white-space: nowrap;
+        }
+    </style>
+{% endblock %}

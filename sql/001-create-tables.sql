@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS marks
     CONSTRAINT pk_marks PRIMARY KEY (id),
     CONSTRAINT fk_students_subjects_on_student FOREIGN KEY (student_id) REFERENCES students (id) ON DELETE CASCADE,
     CONSTRAINT fk_students_subjects_on_subject FOREIGN KEY (subject_id) REFERENCES subjects (id) ON DELETE CASCADE,
-    CHECK ( mark > 2 AND mark < 6)
+    CHECK ( mark => 3 AND mark <= 5)
 );
 
 CREATE FUNCTION has_professor_a_subject(professorid BIGINT, subjectid BIGINT)

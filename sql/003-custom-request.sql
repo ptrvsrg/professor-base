@@ -21,7 +21,7 @@ FROM schedules
          JOIN subjects ON subjects.id = schedules.subject_id
 WHERE professors.name = 'Марьясов И. В.';
 
-SELECT professors.name AS professor_name,
+SELECT professors.name    AS professor_name,
        COUNT(students.id) AS student_count
 FROM professors
          JOIN professors_groups ON professors.id = professors_groups.professor_id
@@ -29,7 +29,7 @@ FROM professors
 GROUP BY professors.name
 ORDER BY student_count DESC, professor_name;
 
-SELECT groups.number AS group_number,
+SELECT groups.number   AS group_number,
        AVG(marks.mark) AS average_mark
 FROM groups
          JOIN students ON groups.id = students.group_id

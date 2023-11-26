@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS students
     CHECK (email LIKE '%_@__%.__%')
 );
 
-CREATE FUNCTION is_elder_from_own_group(elder_student_id BIGINT, elder_group_id BIGINT)
+CREATE OR REPLACE FUNCTION is_elder_from_own_group(elder_student_id BIGINT, elder_group_id BIGINT)
     RETURNS BIT AS
 $is_elder_from_own_group$
 BEGIN
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS marks
     CHECK ( mark => 3 AND mark <= 5)
 );
 
-CREATE FUNCTION has_professor_a_subject(professorid BIGINT, subjectid BIGINT)
+CREATE OR REPLACE FUNCTION has_professor_a_subject(professorid BIGINT, subjectid BIGINT)
     RETURNS BIT AS
 $has_professor_a_subject$
 DECLARE
@@ -129,7 +129,7 @@ END;
 $has_professor_a_subject$
     LANGUAGE plpgsql;
 
-CREATE FUNCTION has_professor_a_group(professorid BIGINT, groupid BIGINT)
+CREATE OR REPLACE FUNCTION has_professor_a_group(professorid BIGINT, groupid BIGINT)
     RETURNS BIT AS
 $has_professor_a_group$
 DECLARE
